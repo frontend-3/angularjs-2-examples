@@ -1,4 +1,4 @@
-System.register(['angular2/platform/browser', 'angular2/core', './zippy'], function(exports_1) {
+System.register(['angular2/platform/browser', 'angular2/core', 'angular2/src/facade/async'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,8 +8,8 @@ System.register(['angular2/platform/browser', 'angular2/core', './zippy'], funct
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var browser_1, core_1, zippy_1;
-    var ZippyApp;
+    var browser_1, core_1, async_1;
+    var App;
     return {
         setters:[
             function (browser_1_1) {
@@ -18,26 +18,36 @@ System.register(['angular2/platform/browser', 'angular2/core', './zippy'], funct
             function (core_1_1) {
                 core_1 = core_1_1;
             },
-            function (zippy_1_1) {
-                zippy_1 = zippy_1_1;
+            function (async_1_1) {
+                async_1 = async_1_1;
             }],
         execute: function() {
-            ZippyApp = (function () {
-                function ZippyApp() {
-                    this.logs = [];
+            App = (function () {
+                function App() {
+                    this.log = new core_1.EventEmitter();
                 }
-                ZippyApp.prototype.pushLog = function (log) { this.logs.push(log); };
-                ZippyApp = __decorate([
-                    core_1.Component({ selector: 'zippy-app' }),
-                    core_1.View({
-                        template: "\n    <zippy (open)=\"pushLog('open')\" (close)=\"pushLog('close')\" title=\"Details\">\n      This is some content.\n    </zippy>\n    <ul>\n      <li *ngFor=\"var log of logs\">{{log}}</li>\n    </ul>\n  ",
-                        directives: [zippy_1.Zippy]
+                App.prototype.eventClick = function () {
+                    console.log('click');
+                    async_1.ObservableWrapper.callEmit(this.log, null);
+                };
+                App.prototype.showLog = function () {
+                    console.log('hola');
+                };
+                __decorate([
+                    core_1.Output(), 
+                    __metadata('design:type', Object)
+                ], App.prototype, "log", void 0);
+                App = __decorate([
+                    core_1.Component({
+                        selector: 'app',
+                        template: "\n    <div (click)=\"eventClick()\" (log)=\"showLog()\">\n    click me\n    </div>\n  ",
                     }), 
                     __metadata('design:paramtypes', [])
-                ], ZippyApp);
-                return ZippyApp;
+                ], App);
+                return App;
             })();
-            browser_1.bootstrap(ZippyApp);
+            exports_1("App", App);
+            browser_1.bootstrap(App);
         }
     }
 });
