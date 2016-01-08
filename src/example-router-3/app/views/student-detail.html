@@ -1,0 +1,23 @@
+<h2>HEROES</h2>
+<div *ngIf="student">
+  <h3>"{{student.name}}"</h3>
+  <div>
+    <label>Id: </label>{{student.id}}</div>
+  <div>
+    <label>Name: </label>
+    <input [(ngModel)]="student.name" placeholder="name"/>
+  </div>
+  <div>
+    <label>Ep1: </label>
+    <input [(ngModel)]="student.ep1" placeholder="ep1"/>
+  </div>
+  <div>
+    <label>Ep2: </label>
+    <input [(ngModel)]="student.ep2" placeholder="ep2"/>
+  </div>
+  <div>
+    <label>Pf: </label>
+    <input [(ngModel)]="student.pf" placeholder="pf" disabled/>
+  </div>
+  <button (click)="gotoStudents()">Back</button>
+</div>

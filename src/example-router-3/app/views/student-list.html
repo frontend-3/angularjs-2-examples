@@ -1,0 +1,7 @@
+<h2>HEROES</h2>
+<ul>
+  <li *ngFor="#student of students"
+    (click)="onSelect(student)">
+    <span class="badge">{{student.id}}</span> {{student.name}} {{student.last_name}}
+  </li>
+</ul>
